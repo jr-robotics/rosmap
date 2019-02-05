@@ -1,0 +1,106 @@
+{  
+   "type":"array",
+   "title":"Array that contains all repository-objects.",
+   "items":{  
+      "type":"object",
+      "title":"The repository class.",
+      "required":[  
+         "url",
+         "continuous_integration",
+         "rosinstall",
+         "contributors",
+         "branch_count",
+         "changelog",
+         "packages",
+         "cpplint_errors",
+         "last_update",
+         "readme"
+      ],
+      "properties":{  
+         "open_issues":{  
+            "type":"integer",
+            "title":"Number of open issues."
+         },
+         "url":{  
+            "type":"string",
+            "title":"The origin-url of the repository"
+         },
+         "continuous_integration":{  
+            "type":"boolean",
+            "title":"Is there a file present that suggests continuous integration is set up?"
+         },
+         "rosinstall":{  
+            "type":"boolean",
+            "title":"Is there a rosinstall file present?"
+         },
+         "open_pull_requests":{  
+            "type":"integer",
+            "title":"Number of open pull-requests"
+         },
+         "contributors":{  
+            "type":"integer",
+            "title":"Number of contributors"
+         },
+         "branch_count":{  
+            "type":"integer",
+            "title":"Number of branches"
+         },
+         "changelog":{  
+            "type":"boolean",
+            "title":"Is there a CHANGELOG file present?"
+         },
+         "issue_durations":{  
+            "type":"array",
+            "title":"Issue durations in seconds.",
+            "items":{  
+               "type":"number"
+            }
+         },
+         "packages":{  
+            "type":"array",
+            "title":"Packages contained in this repository.",
+            "items":{  
+               "type":"object",
+               "title":"The package-class.",
+               "required":[  
+                  "name",
+                  "dependencies"
+               ],
+               "properties":{  
+                  "name":{  
+                     "type":"string",
+                     "title":"The package's name"
+                  },
+                  "dependencies":{  
+                     "type":"array",
+                     "title":"The package's dependencies (package names of dependencies)",
+                     "items":{  
+                        "type":"string"
+                     }
+                  }
+               }
+            }
+         },
+         "closed_pull_requests":{  
+            "type":"integer",
+            "title":"Number of closed pull-requests"
+         },
+         "stars":{  
+            "type":"integer",
+            "title":"Number of github-stars/bitbucket-watchers"
+         },
+         "cpplint_errors":{  
+            "type":"integer",
+            "title":"Number of cpplint errors."
+         },
+         "last_update":{  
+            "type":"number",
+            "title":"Time of last repository commit as UNIX-Timestamp"
+         },
+         "readme":{  
+            "type":"boolean",
+            "title":"Is there a readme-file present?"
+         }
+      }
+   }
+}

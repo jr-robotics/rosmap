@@ -1,0 +1,8 @@
+GitPython==2.1.8
+pyyaml==3.12
+pyquery==1.4.0
+urllib3
+python-hglib==2.6.1
+svn==0.3.46
+python-dateutil==2.7.5
+cpplint
