@@ -1,5 +1,5 @@
 GitPython==2.1.8
-pyyaml==3.12
+pyyaml==4.2b1
 pyquery==1.4.0
 urllib3
 python-hglib==2.6.1
