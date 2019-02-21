@@ -28,7 +28,7 @@ The application contained in this repository provides the means to:
     - **Note: this tool only supports (and has only been tested on) Ubuntu;** if you want to tinker with it on other systems see a [list of prerequisites](#system-prerequisites).
   - Clone this repository.
   - `cd` into the cloned repository.
-  - Install requirements.txt (`pip install -p requirements.txt`)
+  - Install requirements.txt (`pip install -r requirements.txt`)
 
 ### Step 2: Configuration
 
