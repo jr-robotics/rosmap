@@ -13,4 +13,4 @@ parts:
 
 apps:
   rosmap:
-    command: bin/analyze.py
+    command: bin/rosmap_launcher.py

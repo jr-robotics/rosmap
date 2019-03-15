@@ -21,7 +21,7 @@ class ModuleLoader(object):
         # create list.
         objects = list()
 
-        logging.info('[ModuleLoader]: Initializing parsers at ' + dir_path)
+        logging.info('[ModuleLoader]: Initializing parsers at ' + dir_path + '/' + package)
 
         # get modules iterator.
         modules = pkgutil.iter_modules(path=[dir_path + '/' + package])
@@ -38,6 +38,7 @@ class ModuleLoader(object):
             module_path = package.replace("/", ".")
 
             # Import module.
+            print(module_path + "." + mod_name)
             mod = importlib.import_module(module_path + "." + mod_name)
 
             # Get class names from module and instantiate classes.

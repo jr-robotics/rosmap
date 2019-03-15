@@ -3,7 +3,7 @@ import argparse
 import json
 import os
 import logging
-from loaders.module_loader import ModuleLoader
+from rosmap.loaders.module_loader import ModuleLoader
 
 PROGRAM_DESCRIPTION = ""
 
@@ -19,7 +19,7 @@ def load_parsers(settings: dict) -> list:
 def load_cloners(settings: dict) -> dict:
     cloners = dict()
     for cloner in ModuleLoader.load_modules(os.path.dirname(os.path.realpath(__file__)),
-                                            "repository_cloners",
+                                            "rosmap/repository_cloners",
                                             ["IRepositoryCloner"],
                                             "RepositoryCloner",
                                             settings):
@@ -29,7 +29,7 @@ def load_cloners(settings: dict) -> dict:
 
 def load_package_analyzers(settings: dict) -> list:
     return ModuleLoader.load_modules(os.path.dirname(os.path.realpath(__file__)),
-                                              "package_analyzers",
+                                              "rosmap/package_analyzers",
                                               ["PackageAnalyzer"],
                                               "Analyzer",
                                               settings)
@@ -37,7 +37,7 @@ def load_package_analyzers(settings: dict) -> list:
 
 def load_file_analyzers() -> list:
     return ModuleLoader.load_modules(os.path.dirname(os.path.realpath(__file__)),
-                                 "file_analyzers",
+                                 "rosmap/file_analyzers",
                                  ["IFileAnalyzer"],
                                  "FileAnalyzer")
 
@@ -45,7 +45,7 @@ def load_file_analyzers() -> list:
 def load_analyzers(settings: dict) -> dict:
     analyzers = dict()
     for analyzer in ModuleLoader.load_modules(os.path.dirname(os.path.realpath(__file__)),
-                                              "repository_analyzers/offline",
+                                              "rosmap/repository_analyzers/offline",
                                               ["IRepositoryAnalyzer", "AbstractRepositoryAnalyzer"],
                                               "RepositoryAnalyzer",
                                               load_package_analyzers(settings),
@@ -57,7 +57,7 @@ def load_analyzers(settings: dict) -> dict:
 def load_remote_analyzers(settings: dict) -> dict:
     remote_analyzers = dict()
     for analyzer in ModuleLoader.load_modules(os.path.dirname(os.path.realpath(__file__)),
-                                              "repository_analyzers/online",
+                                              "rosmap/repository_analyzers/online",
                                               ["ISCSRepositoryAnalyzer"],
                                               "RepositoryAnalyzer",
                                               settings):
@@ -71,10 +71,10 @@ def write_to_file(path, repo_details):
     output_file.close()
 
 
-if __name__ == "__main__":
+def main():
     # Create argument-parser
     parser = argparse.ArgumentParser(description=PROGRAM_DESCRIPTION)
-    parser.add_argument("--config", "-c", help="Add a path to the config.json file that contains, usernames, api-tokens and settings.", default="./config/config.json")
+    parser.add_argument("--config", "-c", help="Add a path to the config.json file that contains, usernames, api-tokens and settings.", default=os.path.dirname(os.path.realpath(__file__)) + "/config/config.json")
     parser.add_argument("--load_existing", "-l", help="Use this flag to load previous link-files from workspace.", default=False, action="store_true")
     parser.add_argument("--skip_download", "-d", help="Use this flag to skip downloading of repositories to your workspace.", default=False, action="store_true")
     parser.add_argument("--output", "-o", help="Add a path to the output file for the analysis. If this path is not defined, analysis will not be performed. ", default="")
