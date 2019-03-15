@@ -109,8 +109,7 @@ venv.bak/
 # User-specific stuff:
 .idea/**/workspace.xml
 .idea/**/tasks.xml
-.idea/dictionaries
-.idea/sonarlint
+.idea/
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/

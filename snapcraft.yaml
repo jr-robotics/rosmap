@@ -1,0 +1,16 @@
+name: rosmap
+version: git
+summary: rosmap
+description: Clones and analyzes ROS-Packages.
+
+confinement: devmode
+
+parts:
+  rosmap:
+    plugin: python
+    python-version: python3
+    source: .
+
+apps:
+  rosmap:
+    command: bin/analyze.py
