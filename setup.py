@@ -10,6 +10,7 @@ setup(
                       'pyyaml>=4.2b1',
                       'pyquery>=1.4.0',
                       'urllib3',
+                      'certifi',
                       'python-hglib>=2.6.1',
                       'svn>=0.3.46',
                       'python-dateutil>=2.7.5',

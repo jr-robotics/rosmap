@@ -1,7 +1,7 @@
 import dateutil.parser
 import logging
 from .i_scs_analyzer import ISCSRepositoryAnalyzer
-from api_bindings.github_api_bindings import GithubApiBindings
+from rosmap.api_bindings.github_api_bindings import GithubApiBindings
 
 
 class GithubRepositoryAnalyzer(ISCSRepositoryAnalyzer):

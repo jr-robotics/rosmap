@@ -1,7 +1,7 @@
 import dateutil
 import logging
 from .i_scs_analyzer import ISCSRepositoryAnalyzer
-from api_bindings.bitbucket_api_bindings import BitbucketApiBindings
+from rosmap.api_bindings.bitbucket_api_bindings import BitbucketApiBindings
 
 
 class BitbucketRepositoryAnalyzer(ISCSRepositoryAnalyzer):

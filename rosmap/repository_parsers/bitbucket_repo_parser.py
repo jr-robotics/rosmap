@@ -17,7 +17,7 @@ class BitbucketRepositoryParser(IRepositoryParser):
         self.__settings = settings
 
     def parse_repositories(self, repository_dict: dict) -> None:
-
+        return None
         links = set()
         page_number = 0
         previous_length = -1
@@ -65,4 +65,4 @@ class BitbucketRepositoryParser(IRepositoryParser):
                              + str(progress_counter) + "/" + str(len(links)) + "]")
             except HTTPError as error:
                 # Notify user of error.
-                logging.warning("[BitbucketRepoParser]: Error. Could not parse from " + link + ", " + error.reason)
+                logging.warning("[BitbucketRepoParser]: Could not parse from " + link + ", " + error.reason)

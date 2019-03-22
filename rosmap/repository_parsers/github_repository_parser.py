@@ -1,4 +1,4 @@
-from api_bindings.github_api_bindings import GithubApiBindings
+from rosmap.api_bindings.github_api_bindings import GithubApiBindings
 from .i_repository_parser import IRepositoryParser
 
 
@@ -18,5 +18,6 @@ class GithubRepositoryParser(IRepositoryParser):
         self.__settings = settings
 
     def parse_repositories(self, repository_dict: dict) -> None:
+        return None
         # Github only hosts git repositories.
         repository_dict["git"].update(self.__api_bindings.get_urls_of_topic(self.__settings["github_search_topic"]))

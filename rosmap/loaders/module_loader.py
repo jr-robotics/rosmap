@@ -38,8 +38,7 @@ class ModuleLoader(object):
             module_path = package.replace("/", ".")
 
             # Import module.
-            print(module_path + "." + mod_name)
-            mod = importlib.import_module(module_path + "." + mod_name)
+            mod = importlib.import_module("rosmap." + module_path + "." + mod_name)
 
             # Get class names from module and instantiate classes.
             for selected_classname in ModuleLoader.get_classnames_from_module(mod, class_suffix, ignore_classes):

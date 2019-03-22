@@ -4,7 +4,6 @@ import json
 import os
 import logging
 from rosmap.loaders.module_loader import ModuleLoader
-
 PROGRAM_DESCRIPTION = ""
 
 
@@ -19,7 +18,7 @@ def load_parsers(settings: dict) -> list:
 def load_cloners(settings: dict) -> dict:
     cloners = dict()
     for cloner in ModuleLoader.load_modules(os.path.dirname(os.path.realpath(__file__)),
-                                            "rosmap/repository_cloners",
+                                            "repository_cloners",
                                             ["IRepositoryCloner"],
                                             "RepositoryCloner",
                                             settings):
@@ -29,7 +28,7 @@ def load_cloners(settings: dict) -> dict:
 
 def load_package_analyzers(settings: dict) -> list:
     return ModuleLoader.load_modules(os.path.dirname(os.path.realpath(__file__)),
-                                              "rosmap/package_analyzers",
+                                              "package_analyzers",
                                               ["PackageAnalyzer"],
                                               "Analyzer",
                                               settings)
@@ -37,7 +36,7 @@ def load_package_analyzers(settings: dict) -> list:
 
 def load_file_analyzers() -> list:
     return ModuleLoader.load_modules(os.path.dirname(os.path.realpath(__file__)),
-                                 "rosmap/file_analyzers",
+                                 "file_analyzers",
                                  ["IFileAnalyzer"],
                                  "FileAnalyzer")
 

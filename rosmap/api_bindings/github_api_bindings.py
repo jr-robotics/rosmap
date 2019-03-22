@@ -1,8 +1,9 @@
-import time
-import urllib3
 import json
-import sys
 import logging
+import time
+import certifi
+
+import urllib3
 
 PAGE_SIZE = 100
 TOPIC_SEARCH_URL = 'https://api.github.com/search/repositories?q=topic%3A'
@@ -30,7 +31,7 @@ class GithubApiBindings:
         :return: Response
         """
         time.sleep(3600/self.__rate_limit)
-        http = urllib3.PoolManager()
+        http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
         return http.request('GET',
                             url,
                             headers=urllib3.util.make_headers(basic_auth=self.__username + ":" + self.__password,
@@ -51,7 +52,7 @@ class GithubApiBindings:
         else:
             response = self.__form_github_request(url + "&sort=stars&order=dsc")
         if response.status == 200:
-            return json.loads(response.data.decode(sys.stdout.encoding))
+            return json.loads(response.data.decode('utf-8'))
         else:
             return json.loads('{"items":{}}')
 
@@ -149,7 +150,7 @@ class GithubApiBindings:
                 logging.warning("[Github API Connector]: Response returned " + str(response.status))
             else:
                 data = response.data
-                issues = json.loads(data.decode(sys.stdout.encoding))
+                issues = json.loads(data.decode(response))
                 for issue in issues:
                     yield issue
                 next_uri = self.__extract_next_url_from_header(response.headers)
@@ -164,7 +165,7 @@ class GithubApiBindings:
         response = self.__form_github_request("https://api.github.com/repos/" + project_string)
         if response.status == 200:
             data = response.data
-            return json.loads(data.decode(sys.stdout.encoding))["stargazers_count"]
+            return json.loads(data.decode('utf-8'))["stargazers_count"]
         return -1
 
     def is_pull_request(self, issue: dict):

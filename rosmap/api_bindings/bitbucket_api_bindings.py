@@ -1,8 +1,8 @@
-import time
-import urllib3
 import json
-import sys
 import logging
+import time
+import certifi
+import urllib3
 
 
 class BitbucketApiBindings:
@@ -19,7 +19,7 @@ class BitbucketApiBindings:
         :return: The response resulting from the request.
         """
         time.sleep(3600/self.__rate_limit)
-        http = urllib3.PoolManager()
+        http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
         return http.request('GET',
                             url)
 
@@ -47,7 +47,7 @@ class BitbucketApiBindings:
             "https://api.bitbucket.org/2.0/repositories/" + project_string + "/watchers")
         if response.status == 200:
             data = response.data
-            decoded = json.loads(data.decode(sys.stdout.encoding))
+            decoded = json.loads(data.decode('utf-8'))
             return decoded["size"]
         return -1
 
@@ -93,7 +93,7 @@ class BitbucketApiBindings:
                 logging.info("[Bitbucket API Connector]: Could not reach " + next_url + ", request returned " + str(response.status))
                 next_url = ""
             else:
-                result = json.loads(response.data.decode(sys.stdout.encoding))
+                result = json.loads(response.data.decode('utf-8'))
 
                 if "values" in result:
                     for value in result["values"]:
