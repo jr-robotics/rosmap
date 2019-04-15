@@ -4,7 +4,7 @@ import os
 import re
 import logging
 
-REGEX_REPO_NAME = '\/([^/]+)$'
+REGEX_REPO_NAME = '\/([^/]+)\/*$'
 REGEX_REPO_NAME_GROUP = 1
 
 
