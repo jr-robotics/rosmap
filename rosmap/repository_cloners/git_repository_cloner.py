@@ -4,6 +4,7 @@ from git import GitCommandError
 import os
 import re
 import logging
+from shutil import copy
 
 REGEX_REPO_NAME = '\/([^\/]+?)\/([^\/]+?)\.git'
 REGEX_REPO_USER_GROUP = 1
@@ -16,7 +17,10 @@ class GitRepositoryCloner(IRepositoryCloner):
         self.__settings = settings
 
     def clone_repositories(self, repository_set: set) -> None:
-        os.environ['GIT_ASKPASS'] = os.path.dirname(os.path.realpath(__file__)) + "/git_askpass.py"
+        copy(os.path.dirname(os.path.realpath(__file__)) + "/git_askpass.py", self.__settings["analysis_workspace"])
+        os.chmod(self.__settings["analysis_workspace"] + "/git_askpass.py", 0o777)
+        os.environ['GIT_ASKPASS'] = self.__settings["analysis_workspace"] + "/git_askpass.py"
+        print(os.environ['GIT_ASKPASS'])
         os.environ['GIT_USERNAME'] = self.__settings["github_username"]
         os.environ['GIT_PASSWORD'] = self.__settings["github_password"]
         # Create folder
