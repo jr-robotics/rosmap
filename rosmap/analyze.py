@@ -4,6 +4,8 @@ import json
 import os
 import logging
 from rosmap.loaders.module_loader import ModuleLoader
+from shutil import copy
+
 PROGRAM_DESCRIPTION = ""
 
 
@@ -77,6 +79,7 @@ def main():
     parser.add_argument("--load_existing", "-l", help="Use this flag to load previous link-files from workspace.", default=False, action="store_true")
     parser.add_argument("--skip_download", "-d", help="Use this flag to skip downloading of repositories to your workspace.", default=False, action="store_true")
     parser.add_argument("--output", "-o", help="Add a path to the output file for the analysis. If this path is not defined, analysis will not be performed. ", default="")
+    parser.add_argument("--generate_config", help="Generates a config file on the given path.")
 
     # Parse arguments
     arguments = parser.parse_args()
@@ -85,6 +88,10 @@ def main():
     logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
     logging.getLogger("urllib3").setLevel(logging.WARNING)
     logging.getLogger("requests").setLevel(logging.WARNING)
+
+    if arguments.generate_config is not None:
+        copy(os.path.dirname(os.path.realpath(__file__)) + "/config/config.json", arguments.generate_config)
+        return 0
 
     # Warn user that output has to be set to analyze:
     if arguments.output == "":

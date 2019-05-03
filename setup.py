@@ -3,9 +3,9 @@
 from setuptools import setup, find_packages
 setup(
     name="rosmap",
-    version="0.1",
+    version="0.2",
     packages=find_packages(),
-    scripts=['rosmap_launcher.py'],
+    scripts=['rosmap-launcher'],
     install_requires=['GitPython>=2.1.8',
                       'pyyaml>=4.2b1',
                       'pyquery>=1.4.0',

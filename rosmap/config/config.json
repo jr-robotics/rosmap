@@ -1,6 +1,6 @@
 {
-  "github_username": "USERNAME_HERE",
-  "github_password": "API_TOKEN_HERE",
+  "github_username": "",
+  "github_password": "",
   "github_search_topic": "ros",
   "github_search_rate_limit": 1800,
   "github_api_rate_limit": 5000,
