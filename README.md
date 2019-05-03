@@ -23,12 +23,21 @@ The application contained in this repository provides the means to:
 ## How do I use it?
 
 ### Step 1: Setup
+  
+  - Install the rosmap package from PyPI using `sudo pip3 install rosmap`
+  - Install the version control systems needed for cloning and analyzing the repositories via `sudo apt-get install git subversion mercurial`
+  - **Note: this tool only supports (and has only been tested on) Ubuntu 16.04 and 19.04;**
+  
+  **OR (from source)**
+
   - Install the prerequisites on your system.
     - On Ubuntu 16.04 run (`sudo apt-get install python3.5 python-pip git subversion mercurial`)
-    - **Note: this tool only supports (and has only been tested on) Ubuntu;** if you want to tinker with it on other systems see a [list of prerequisites](#system-prerequisites).
+    - **Note: this tool only supports (and has only been tested on) Ubuntu 16.04 and 19.04;** if you want to tinker with it on other systems see a [list of prerequisites](#system-prerequisites).
   - Clone this repository.
   - `cd` into the cloned repository.
   - Install requirements.txt (`pip install -r requirements.txt`)
+  
+
 
 ### Step 2: Configuration
 
@@ -48,7 +57,7 @@ The application contained in this repository provides the means to:
   }
   ```
   
-  Simply replace `USERNAME_HERE` with your account's username, and the `API_TOKEN_HERE` with your API-Token. Alternatively you can also use your password if two-factor authentication is not enabled for your account.
+  Simply replace `USERNAME_HERE` with your account's username, and the `API_TOKEN_HERE` with your API-Token. Alternatively you can also use your password if two-factor authentication is not enabled for your account (not recommended).
   
   The rate-limits are already preconfigured to the standard rate limits of GitHub's API for authenticated users (5000 requests/hour for the v3 API, configured in `github_api_rate_limit` and 1800 requests/hour for the Search-API, configured in `github_search_rate_limit`). It is also possible to omit authentication, however, the rate-limit will need to be reduced to 60 requests/hour (or 600 requests/hour for search), making analysis of a large amount of repositories practically unfeasible.
   ```
@@ -119,7 +128,7 @@ You can either run a [full analysis](#step-3a-full-analysis), [skip certain step
    
    A full analysis will include:
    - **gathering repository URLs** from github- and bitbucket-searches as well as the official ROS Index found in the rosdistro-repository. The URLs will be written to your `analysis_workspace`, in the subfolder `links/`. For each type, there will be one file named accordingly. Re-running the analysis will parse all URLs again.
-   - **cloning ALL repositories** found while gathering URLs to your machine. **(NOTE: This operation requires a significant amount of disk space, our analysis resulted in over 70GB worth of repositories, make sure you have the space for it in advance.)**
+   - **cloning ALL repositories** found while gathering URLs to your machine. **(NOTE: This operation requires a significant amount of disk space, our analysis resulted in well over 70GB worth of repositories, make sure you have the space for it in advance.)**
    - **Analyze all repositories** for contained packages, their dependencies, cpplint-issues, github stars (bitbucket watchers), branch count, issue count and duration, last updated time, and contributors.
 
 #### Step 3.b: Partial analysis
