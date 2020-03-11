@@ -150,7 +150,7 @@ class GithubApiBindings:
                 logging.warning("[Github API Connector]: Response returned " + str(response.status))
             else:
                 data = response.data
-                issues = json.loads(data.decode(response))
+                issues = json.loads(data.decode('utf-8'))
                 for issue in issues:
                     yield issue
                 next_uri = self.__extract_next_url_from_header(response.headers)
